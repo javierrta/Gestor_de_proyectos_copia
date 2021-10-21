@@ -4,6 +4,8 @@ require_once("controladores/controlador.php");
 if (!isset($_SESSION['usu_id'])) {
     //$usu_id = $_SESSION['usu_id'];
     $usu_id = "1";
+    //$usu_nombre = $_SESSION['usu_nombre'];
+    $usu_nombre = "Jefe Proyecto 1";
     $sql = "SELECT * FROM proyectos, usuarios, situaciones
                         WHERE usu_id = proy_usu_id AND sit_id = proy_sit_id
                         ORDER BY proy_id";
@@ -53,6 +55,7 @@ echo "</pre>";
         <h1 style="color:red;text-align:center;">GESTOR DE PROYECTOS</h1>
         <h2 style="color:red;text-align:center;">
             Jefe de proyecto 1
+            <?=$usu_nombre?>
         </h2>
     </header>
 
