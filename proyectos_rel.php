@@ -3,7 +3,9 @@ require_once("controladores/controlador.php");
 
 if (!isset($_SESSION['usu_id'])) {
     //$usu_id = $_SESSION['usu_id'];
+    //$usu_nombre = $_SESSION['usu_nombre'];
     $usu_id = "1";
+    $usu_nombre = "Jefe de Proyecto 1";
     $sql = "SELECT * FROM proyectos, usuarios, situaciones
                         WHERE usu_id = proy_usu_id AND sit_id = proy_sit_id
                         ORDER BY proy_id";
@@ -37,22 +39,16 @@ echo "</pre>";
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Relación de Proyectos</title>
-
-    <style>
-        #h1_proy_rel {
-            color: red;
-            text-align: center;
-        }
-    </style>
+    <title>Relación de Proyectos</title>    
 </head>
 
 <body>
-    <header>
-        
-        <h1 style="color:red;text-align:center;">GESTOR DE PROYECTOS</h1>
-        <h2 style="color:red;text-align:center;">
-            Jefe de proyecto 1
+    <header>        
+        <h1 style="color:IndianRed;text-align:center;">
+            GESTIÓN DE PROYECTOS
+        </h1>
+        <h2 style="color:IndianRed;text-align:center;">
+            <?=$usu_nombre?>
         </h2>
     </header>
 
@@ -60,7 +56,7 @@ echo "</pre>";
         <div class="div_propietario">
             <table border=1 style="margin:0 auto;">
                     <tr style="background-color:#FFC5BE;">
-                        <th>Id del proyecto</th>
+                        <!-- <th>Id del proyecto</th> -->
                         <th>Proyecto</th>
                         <th>Propietario</th>
                         <th>Fecha prevista inicio</th>
@@ -69,14 +65,14 @@ echo "</pre>";
                         <th>Fecha real fin</th>
                         <th>Duración</th>
                         <th>Situación</th>
-                        <th>Observaciones</th>
+                        <!-- <th>Observaciones</th> -->
                         <th colspan="3">Acciones</th>
                     </tr>
                 <?php foreach ($datos as $registro) : ?>   
                     <tr>
-                            <td style="width:30px;text-align:center;">
+                            <!-- <td style="width:30px;text-align:center;">
                                 <?php echo($registro->proy_id) ?>
-                            </td>
+                            </td> -->
                             <td style="width:150px;text-align:center;">
                                 <?php echo($registro->proy_nombre) ?>
                             </td>
@@ -84,16 +80,40 @@ echo "</pre>";
                                 <?php echo($registro->usu_nombre) ?>
                             </td>
                             <td style="width:150px;text-align:center;">
-                                <?php echo($registro->proy_ft_inicio) ?>
+                                <?php 
+                                    if (($registro->proy_ft_inicio) != ""){
+                                        echo($registro->proy_ft_inicio);
+                                    } else {
+                                        echo "hola";
+                                    }
+                                ?>                                
                             </td>
                             <td style="width:150px;text-align:center;">
-                                <?php echo($registro->proy_ft_fin) ?>
+                                <?php 
+                                    if (($registro->proy_ft_fin) != "0000-00-00"){
+                                        echo($registro->proy_ft_fin);
+                                    } else {
+                                        echo "";
+                                    }
+                                ?>
                             </td>
                             <td style="width:150px;text-align:center;">
-                                <?php echo($registro->proy_fr_inicio) ?>
+                                <?php 
+                                    if (($registro->proy_fr_inicio) != "0000-00-00"){
+                                        echo($registro->proy_fr_inicio);
+                                    } else {
+                                        echo "";
+                                    }
+                                ?>
                             </td>
                             <td style="width:150px;text-align:center;">
-                                <?php echo($registro->proy_fr_fin) ?>
+                                <?php 
+                                    if (($registro->proy_fr_fin) != "0000-00-00"){
+                                        echo($registro->proy_fr_fin);
+                                    } else {
+                                        echo "";
+                                    }
+                                ?>
                             </td>
                             <td style="width:90px;text-align:center;">
                                 <?php echo($registro->proy_duracion) ?>
@@ -101,22 +121,22 @@ echo "</pre>";
                             <td style="width:90px;text-align:center;">
                                 <?php echo($registro->sit_nombre) ?>
                             </td>
-                            <td style="width:400px;padding-left:5px;text-align:left;">
+                            <!-- <td style="width:400px;padding-left:5px;text-align:left;">
                                 <?php echo($registro->proy_obs) ?>
-                            </td>
+                            </td> -->
                         <?php if (($registro->proy_usu_id) == $usu_id) : ?>
-                            <td style="width:90px;text-align:center;border:1px red solid;cursor:pointer;background-color:#FDEBD0;">
+                            <td style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
                                 Modificar
                             </td>
-                            <td style="width:90px;text-align:center;border:1px red solid;cursor:pointer;background-color:#FDEBD0;">
+                            <td style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
                                 Borrar
                             </td>
-                            <td style="width:90px;text-align:center;border:1px red solid;cursor:pointer;background-color:#FDEBD0;">
+                            <td style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
                                 Consultar
                             </td>
                         <?php endif; ?>
                         <?php if (($registro->proy_usu_id) != $usu_id) : ?>
-                            <td colspan="3" style="width:90px;text-align:center;border:1px red solid;cursor:pointer;background-color:#FDEBD0;">
+                            <td colspan="3" style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
                                 Consultar
                             </td>                
                         <?php endif; ?>
