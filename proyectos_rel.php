@@ -5,7 +5,7 @@ if (!isset($_SESSION['usu_id'])) {
     //$usu_id = $_SESSION['usu_id'];
     $usu_id = "1";
     //$usu_nombre = $_SESSION['usu_nombre'];
-    $usu_nombre = "Jefe Proyecto 1";
+    $usu_nombre = "Jefe de proyecto 1";
     $sql = "SELECT * FROM proyectos, usuarios, situaciones
                         WHERE usu_id = proy_usu_id AND sit_id = proy_sit_id
                         ORDER BY proy_id";
@@ -42,9 +42,11 @@ echo "</pre>";
     <title>Relación de Proyectos</title>
 
     <style>
-        #h1_proy_rel {
-            color: red;
-            text-align: center;
+        th {
+            padding: 10px 1px;
+        }
+        td {
+            padding: 10px 1px;
         }
     </style>
 </head>
@@ -61,10 +63,10 @@ echo "</pre>";
     </header>
 
     <main>
-        <div class="div_propietario">
+        <div>
             <table border=1 style="margin:0 auto;">
                     <tr style="background-color:#FFC5BE;">
-                        <th>Id del proyecto</th>
+                        <!-- <th>Id del proyecto</th> -->
                         <th>Proyecto</th>
                         <th>Propietario</th>
                         <th>Fecha prevista inicio</th>
@@ -73,14 +75,14 @@ echo "</pre>";
                         <th>Fecha real fin</th>
                         <th>Duración</th>
                         <th>Situación</th>
-                        <th>Observaciones</th>
+                        <!-- <th>Observaciones</th> -->
                         <th colspan="3">Acciones</th>
                     </tr>
                 <?php foreach ($datos as $registro) : ?>   
-                    <tr>
-                            <td style="width:30px;text-align:center;">
+                    <tr class="fila_tabla">
+                            <!-- <td style="width:30px;text-align:center;">
                                 <?php echo($registro->proy_id) ?>
-                            </td>
+                            </td> -->
                             <td style="width:150px;text-align:center;">
                                 <?php echo($registro->proy_nombre) ?>
                             </td>
@@ -128,29 +130,31 @@ echo "</pre>";
                             <td style="width:90px;text-align:center;">
                                 <?php echo($registro->sit_nombre) ?>
                             </td>
-                            <td style="width:400px;padding-left:5px;text-align:left;">
+                            <!-- <td style="width:400px;padding-left:5px;text-align:left;">
                                 <?php echo($registro->proy_obs) ?>
-                            </td>
+                            </td> -->
                         <?php if (($registro->proy_usu_id) == $usu_id) : ?>
                             <td style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
-                                Modificar
+                                <button style="width:90px;background-color:#FDEBD0;">Modificar</button>
                             </td>
                             <td style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
-                                Borrar
+                            <button style="width:90px;background-color:#FDEBD0;">Borrar</button>
                             </td>
                             <td style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
-                                Consultar
+                            <button style="width:90px;background-color:#FDEBD0;">Consultar</button>
                             </td>
                         <?php endif; ?>
                         <?php if (($registro->proy_usu_id) != $usu_id) : ?>
                             <td colspan="3" style="width:90px;text-align:center;border:1px IndianRed solid;cursor:pointer;background-color:#FDEBD0;">
-                                Consultar
+                            <button style="width:100%;background-color:#FDEBD0;">Consultar</button>
                             </td>                
                         <?php endif; ?>
                     </tr>
                 <?php endforeach; ?>
                     <tr>
-                        <td colspan="13" style="text-align:center;font-size:20px;font-weight:800;background-color:IndianRed;color:white;cursor:pointer;height:50px;">Añadir un nuevo proyecto</td>
+                        <td colspan="13" style="text-align:center;font-size:20px;font-weight:800;background-color:IndianRed;color:white;cursor:pointer;height:50px;">
+                        <button style="width:100%;font-size:20px;background-color:IndianRed;border:none;cursor:pointer;height:50px;">Añadir un nuevo proyecto</button>
+                        </td>
                     </tr>
 
             </table>
