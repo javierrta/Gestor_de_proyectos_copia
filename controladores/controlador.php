@@ -1,6 +1,6 @@
 <?php
 
-require_once ('conexion.php');
+require_once('conexion.php');
 
 //Controlador que recibe los sql y devuelve Json.
 
@@ -13,7 +13,8 @@ if(!isset($_SESSION['categoria'])){
 }
 */
 
-class controlador {
+class controlador
+{
 
     /**
      *
@@ -22,7 +23,8 @@ class controlador {
      *
      *
      */
-    public static function select($sql){
+    public static function select($sql)
+    {
 
         $dbh = conexion::conectar();
 
@@ -42,7 +44,8 @@ class controlador {
      * @return int De las filas afectadas.
      */
 
-    public static function update($sql){
+    public static function update($sql)
+    {
 
         $dbh = conexion::conectar();
         $stmnt = $dbh->prepare($sql);
@@ -59,7 +62,8 @@ class controlador {
      * @return string con el id generado en la inserción
      */
 
-    public static function insert($sql){
+    public static function insert($sql)
+    {
         $dbh = conexion::conectar();
         $stmnt = $dbh->prepare($sql);
 
@@ -76,7 +80,8 @@ class controlador {
      * @return int número de filas eliminadas.
      */
 
-    public static function delete($sql){
+    public static function delete($sql)
+    {
         $dbh = conexion::conectar();
         $stmnt = $dbh->prepare($sql);
 
