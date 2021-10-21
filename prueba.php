@@ -3,6 +3,7 @@ require_once("controladores/controlador.php");
 
 $sql = "SELECT * FROM situaciones";
 echo $sql."<br>";
+$x="CAMBIO";
 
 $datos = controlador::select($sql);
 echo '<pre>';
