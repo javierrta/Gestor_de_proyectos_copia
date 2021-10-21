@@ -1,0 +1,161 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html,
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    height: 100%;
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    height: 100%;
+}
+
+.bg {
+    background: #adc5e4 url(../img/login/proyectos.jpg) no-repeat center center;
+    min-height: 150px;
+}
+
+.form {
+    align-self: center;
+    margin: 0 4rem 2rem;
+}
+
+h1 {
+    color: #999;
+    font-size: 3rem;
+    margin: 2rem 0;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.links {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.links a {
+    color: hsl(9, 100%, 60%);
+    font-size: 1.2rem;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.links a:hover {
+    color: hsl(242, 15%, 53%);
+}
+
+h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    text-transform: uppercase;
+}
+
+h2.e404 {
+    margin-top: 4rem;
+    text-align: center;
+}
+
+header {
+    text-align: center;
+}
+
+header svg {
+    height: 6rem;
+    margin-bottom: 1rem;
+    width: 6rem;
+}
+
+label {
+    display: none;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+}
+
+input,
+select {
+    background-color: #eee;
+    border: none;
+    color: #777;
+    font-size: 1.5rem;
+    font-weight: 100;
+    padding: 0.75rem 1.5rem;
+    transition: 0.25s;
+    width: 100%;
+}
+
+input:hover,
+select:hover {
+    background-color: hsl(221, 50%, 92%);
+}
+
+input:focus,
+select:focus {
+    background-color: hsl(221, 50%, 92%);
+    border-color: #858cb0;
+    box-shadow: 0 0 0 3px #858cb0;
+    color: #333;
+    outline: none;
+    transition: 0.25s;
+}
+
+input,
+select,
+button {
+    border-radius: 2rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4rem 0;
+}
+
+.form-group {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-field {
+    margin: 20px 0;
+}
+
+button {
+    background: hsl(9, 100%, 64%);
+    border: none;
+    box-shadow: 0 2px 2px rgb(0 0 0 / 0.2);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: 100;
+    margin-top: 2rem;
+    padding: 1rem;
+    transition: 0.25s ease;
+}
+
+button:hover {
+    background-color: hsl(9, 100%, 60%);
+    box-shadow: none;
+    cursor: pointer;
+    transform: translate(0, 2px);
+    transition: 0.25s ease;
+}
+
+.success,
+.error {
+    background: yellowgreen;
+    color: white;
+    display: inline-block;
+}
+
+.error {
+    background: orangered;
+}
