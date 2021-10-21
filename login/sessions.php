@@ -11,7 +11,7 @@
 session_start();
 
 // Obtener la acción a realizar (acceder o registrarse) según la url
-$action = $_GET['action'] ?? $_POST['action'] ?? '404';
+$action = $_GET['action'] ?? $_POST['action'] ?? 'index';
 
 // No establecer las variables hasta enviar el formulario
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
