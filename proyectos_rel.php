@@ -5,7 +5,12 @@ if (!isset($_SESSION['usu_id'])) {
     //$usu_id = $_SESSION['usu_id'];
     //$usu_nombre = $_SESSION['usu_nombre'];
     $usu_id = "1";
+<<<<<<< HEAD
     $usu_nombre = "Jefe de Proyecto 1";
+=======
+    //$usu_nombre = $_SESSION['usu_nombre'];
+    $usu_nombre = "Jefe Proyecto 1";
+>>>>>>> 483a1e2369b16342881698c021dda9f45104e089
     $sql = "SELECT * FROM proyectos, usuarios, situaciones
                         WHERE usu_id = proy_usu_id AND sit_id = proy_sit_id
                         ORDER BY proy_id";
@@ -17,7 +22,7 @@ if (!isset($_SESSION['usu_id'])) {
                     ORDER BY proy_id";
     $datos_recibidos1 = controlador::select($sql);
     $datos1 = json_decode($datos_recibidos1);
-    */
+*/
 }
 
 echo "<pre>";
@@ -43,11 +48,19 @@ echo "</pre>";
 </head>
 
 <body>
+<<<<<<< HEAD
     <header>        
         <h1 style="color:IndianRed;text-align:center;">
             GESTIÓN DE PROYECTOS
         </h1>
         <h2 style="color:IndianRed;text-align:center;">
+=======
+    <header>
+        
+        <h1 style="color:red;text-align:center;">GESTOR DE PROYECTOS</h1>
+        <h2 style="color:red;text-align:center;">
+            Jefe de proyecto 1
+>>>>>>> 483a1e2369b16342881698c021dda9f45104e089
             <?=$usu_nombre?>
         </h2>
     </header>
