@@ -1,14 +1,14 @@
 <?php
-require_once("controladores/controlador.php");
+    require_once("controladores/controlador.php");
+    require_once("funciones_auxiliares/funciones_auxiliares.php");
 
-//session_start();
-
-if (!isset($_SESSION['id'])) {
-//$usuId = $_SESSION['id'];
-    $usuId = 5;
-//$accionId = $_REQUEST['accionId'];
-//echo $usuId;
-
+    if (!isset($_SESSION['usuario'])) {
+        header("Location:index.php");
+        exit();
+    }
+    $usuId = $_SESSION['usuario']->usu_id;
+    $proyectoId = $_REQUEST['proyecto'];
+    $accionId = $_REQUEST['accion'];
 
     if (isset($_POST['idTarea'])) {
         $idTarea = $_POST['idTarea'];
@@ -16,17 +16,15 @@ if (!isset($_SESSION['id'])) {
         $response = controlador::delete($sql);
     }
 
-    $sql = "SELECT tar_id, tar_nombre, tar_fr_inicio, tar_fr_fin, tar_ft_inicio, tar_ft_fin, tar_usu_id, u.usu_nombre,
-                    tar_duracion, s.sit_nombre as tar_sit_id, tar_acc_id, tar_obs
-            FROM tareas 
-            INNER JOIN situaciones s on tareas.tar_sit_id = s.sit_id 
-            INNER JOIN usuarios u on tareas.tar_usu_id = u.usu_id
-            WHERE tar_usu_id = 5 AND tar_acc_id = 1";
+    $sql = "SELECT t.*, u.usu_nombre, s.sit_nombre
+            FROM tareas as t, situaciones as s, usuarios as u
+            WHERE 
+                t.tar_sit_id = s.sit_id AND
+                t.tar_usu_id = u.usu_id AND
+                tar_acc_id = $accionId";
+            echo $sql;
     $response = controlador::select($sql);
     $datos = json_decode($response);
-
-
-}
 
 ?>
 
@@ -37,55 +35,31 @@ if (!isset($_SESSION['id'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Relación de tareas</title>
+    <style>
+        table{
+            width: 100%;
+        }
+        th{
+            text-align: left;
+        }
+    </style>
 </head>
 <body>
 <header>
-    <h1>Relación de tareas del proyecto <?php echo 'id de acción'//$accionId ?></h1>
+    <h1>Relación de tareas del proyecto <?=$proyectoId?> y Acción <?=$accionId?></h1>
 </header>
 <main>
     <table>
         <tr>
-            <th>
-                id de tarea
-            </th>
-            <th>
-                nombre de tarea
-            </th>
-            <th>
-                F. real inicio
-            </th>
-            <th>
-                F. real fin
-            </th>
-            <th>
-                F. teórica inicio
-            </th>
-            <th>
-                F. teórica fin
-            </th>
-            <th>
-                id de usuario
-            </th>
-            <th>
-                duración
-            </th>
-            <th>
-                situación
-            </th>
-            <th>
-                id de acción
-            </th>
-            <th>
-                observaciones
-            </th>
-            <?php if ($usuId == $usuId) : ?>
-                <th style="border: greenyellow 1px solid; ">
-                    Modificar
-                </th>
-                <th style="border: greenyellow 1px solid; ">
-                    Borrar
-                </th>
-            <?php endif; ?>
+            <th>id de tarea</th>
+            <th>nombre de tarea</th>
+            <th>F.REAL Inicio</th>
+            <th>F.REAL fin</th>
+            <th>F.TEOR Inicio</th>
+            <th>F.TEOR Fin</th>
+            <th>id de usuario</th>
+            <th>duración</th>
+            <th>situación</th>
         </tr>
         <?php foreach ($datos as $registro) : ?>
             <tr>
@@ -96,16 +70,16 @@ if (!isset($_SESSION['id'])) {
                     <?php echo($registro->tar_nombre) ?>
                 </td>
                 <td>
-                    <?php echo($registro->tar_fr_inicio) ?>
+                    <?php echo(fLimpiar_Fecha($registro->tar_fr_inicio) ) ?>
                 </td>
                 <td>
-                    <?php echo($registro->tar_fr_fin) ?>
+                    <?php echo(fLimpiar_Fecha($registro->tar_fr_fin)) ?>
                 </td>
                 <td>
-                    <?php echo($registro->tar_ft_inicio) ?>
+                    <?php echo(fLimpiar_Fecha($registro->tar_ft_inicio)) ?>
                 </td>
                 <td>
-                    <?php echo($registro->tar_ft_fin) ?>
+                    <?php echo(fLimpiar_Fecha($registro->tar_ft_fin)) ?>
                 </td>
                 <td>
                     <?php echo($registro->usu_nombre) ?>
@@ -114,15 +88,9 @@ if (!isset($_SESSION['id'])) {
                     <?php echo($registro->tar_duracion) ?>
                 </td>
                 <td>
-                    <?php echo($registro->tar_sit_id) ?>
+                    <?php echo($registro->sit_nombre) ?>
                 </td>
-                <td>
-                    <?php echo($registro->tar_acc_id) ?>
-                </td>
-                <td>
-                    <?php echo($registro->tar_obs) ?>
-                </td>
-                <?php if ($usuId == $usuId) : ?>
+                <?php if ($usuId == $registro->tar_usu_id) : ?>
                     <td>
                         <form action="tareas_frm.php" method="POST">
                             <input type="hidden" name="idTarea" value="<?php echo($registro->tar_id) ?>">
