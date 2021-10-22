@@ -1,5 +1,6 @@
 <?php
 
-define("SERVERBD", "mysql:host=localhost; dbname=bd_proyectos");
+define("BBDD", "bd_proyectos");
+define("SERVERBD", "localhost"); 
 define("USERBD", "root");
 define("PASSBD", "");
